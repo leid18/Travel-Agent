@@ -1,5 +1,9 @@
 contacts-angularjs: Example Application Using Multiple HTML5, Mobile & JAX-RS Technologies 
 =========================================================================================================
+
+This is a Travel Agent application based on Hogo Firth's Maven 3 project
+--------------------------------------------------------------------------
+'
 Author: Hugo Firth 
 Level: Beginner  
 Technologies: Angularjs, JavaScript, HTML5, REST  
