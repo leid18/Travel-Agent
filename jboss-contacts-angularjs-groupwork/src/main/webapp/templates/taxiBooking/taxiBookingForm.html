@@ -1,0 +1,81 @@
+<!--
+    JBoss, Home of Professional Open Source
+    Copyright 2014, Red Hat, Inc. and/or its affiliates, and individual
+    contributors by the @authors tag. See the copyright.txt in the
+    distribution for a full listing of individual contributors.
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+    http://www.apache.org/licenses/LICENSE-2.0
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<!-- This is an Angular.js template -->
+
+<!-- Status messages to be displayed -->
+<div rh-message-bag messages="messages"></div>
+
+<!-- This form is used to add new Booking entries. Upon loading all fields are empty. -->
+<form name="taxiBookingForm" role="form" id="taxiBookingForm">
+
+    <!-- Form group for customer id input and associated error messages. -->
+    <!-- ng-class conditionally applies a class string (e.g 'has-error'), dependent upon a boolean expression. -->
+    <div class="form-group" ng-class="{'has-error': taxiBookingForm.customer.$invalid}">
+        <label for="customer">Customer ID:</label>
+        <!-- ng-pattern validates the contents of an input against a provided regexp. -->
+        <input type="text" name="customer" class="form-control"  id="customer" placeholder="Enter a customer ID."
+               ng-model="taxiBooking.customer.id" ng-pattern="/^[0-9]*$/" required>
+        <!-- Appropriate error messages, to be displayed as required. -->
+        <!-- ng-show conditionally applies the style {display: none !important} if statement is false. -->
+        <p class="help-block" id="customer-required" ng-show="taxiBookingForm.customer.$dirty && taxiBookingForm.customer.$error.required">
+            A customer ID is required.
+        </p>
+        <p class="help-block" id="customer-format" ng-show="taxiBookingForm.customer.$dirty && taxiBookingForm.customer.$error.pattern">
+            Please provide an exist numerical customer ID.
+        </p>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': taxiBookingForm.taxi.$invalid}">
+        <label for="taxi">Taxi ID:</label>
+        <!-- ng-pattern validates the contents of an input against a provided regexp. -->
+        <input type="text" name="taxi" class="form-control"  id="taxi" placeholder="Enter a taxi ID."
+               ng-model="taxiBooking.taxi.id" ng-pattern="/^[0-9]*$/" required>
+        <!-- Appropriate error messages, to be displayed as required. -->
+        <!-- ng-show conditionally applies the style {display: none !important} if statement is false. -->
+        <p class="help-block" id="taxi-required" ng-show="taxiBookingForm.taxi.$dirty && taxiBookingForm.taxi.$error.required">
+            A taxi ID is required.
+        </p>
+        <p class="help-block" id="taxi-format" ng-show="taxiBookingForm.taxi.$dirty && taxiBookingForm.taxi.$error.pattern">
+            Please provide an exist numerical taxi ID.
+        </p>
+    </div>
+    
+    <!-- Form group for date input and associated error messages. -->
+    <!-- ng-class conditionally applies a class string (e.g 'has-error'), dependent upon a boolean expression. -->
+    <div class="form-group" ng-class="{'has-error': taxiBookingForm.date.$invalid}">
+        <label for="date">Date:</label>
+        <!-- min & max provide the valid range of dates for the input. -->
+        <input type="date" name="date" class="form-control" id="date" min="{{date | date:'yyyy-MM-dd'}}"
+               max="2020-01-01" ng-model="taxiBooking.date" required>
+        <!-- Appropriate error messages, to be displayed as required. -->
+        <!-- ng-show conditionally applies the style {display: none !important} if statement is false. -->
+        <p class="help-block" id="date-required" ng-show="taxiBookingForm.date.$dirty && taxiBookingForm.date.$error.required">
+            Please enter a valid date.
+        </p>
+        <p class="help-block" id="date-future" ng-show="taxiBookingForm.date.$dirty && taxiBookingForm.date.$error.max">
+            Booking date cannot be in the past. Please choose one from the future.
+        </p>
+    </div>
+
+    <!-- Hidden form input for default (blank) booking.state value. -->
+    <input name="state" type="hidden" value="" ng-model="taxiBooking.state"/>
+
+    <!-- Load the appropriate form controls depending on whether the variable $scope.create is truthy -->
+    <div ng-if="create" ng-include="'templates/taxiBooking/addControls.html'"></div>
+    <div ng-if="!create" ng-include="'templates/taxiBooking/editControls.html'"></div>
+
+</form>

@@ -1,0 +1,4 @@
+org/jboss/quickstarts/wfk/hotel/HotelRegistrationTest.class
+org/jboss/quickstarts/wfk/flight/FlightRegistrationTest.class
+org/jboss/quickstarts/wfk/contact/ContactRegistrationTest.class
+org/jboss/quickstarts/wfk/taxi/TaxiRegistrationTest.class
